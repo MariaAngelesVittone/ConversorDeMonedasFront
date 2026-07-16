@@ -1,0 +1,15 @@
+<header class="header">
+  <a class="brand" routerLink="/home">Conversor de Monedas</a>
+
+  <nav class="nav">
+    @if (authService.isLoggedIn) {
+      <a routerLink="/converter">Convertir</a>
+      <a routerLink="/currencies">Monedas</a>
+      <span class="user">{{ authService.username }}</span>
+      <button type="button" (click)="logout()">Salir</button>
+    } @else {
+      <a routerLink="/login">Ingresar</a>
+      <a routerLink="/sign-up">Registrarme</a>
+    }
+  </nav>
+</header>

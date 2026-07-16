@@ -1,0 +1,28 @@
+<section class="currencies">
+  <h1>Monedas disponibles</h1>
+
+  @if (currencies.length === 0) {
+    <p>No hay monedas cargadas todavía.</p>
+  } @else {
+    <table>
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Leyenda</th>
+          <th>Símbolo</th>
+          <th>Índice de convertibilidad (vs. USD)</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (currency of currencies; track currency.code) {
+          <tr>
+            <td>{{ currency.code }}</td>
+            <td>{{ currency.leyend }}</td>
+            <td>{{ currency.symbol }}</td>
+            <td>{{ currency.conversionRate }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</section>

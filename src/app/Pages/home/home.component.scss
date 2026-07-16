@@ -1,0 +1,22 @@
+.hero {
+  max-width: 640px;
+  margin: 4rem auto;
+  text-align: center;
+  padding: 0 1.5rem;
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  p {
+    color: #475569;
+    margin-bottom: 2rem;
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}

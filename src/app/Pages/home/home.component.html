@@ -1,0 +1,13 @@
+<section class="hero">
+  <h1>Conversor de Monedas</h1>
+  <p>Registrate, iniciá sesión y convertí entre ARS, USD, EUR y Corona Checa al instante.</p>
+
+  @if (!authService.isLoggedIn) {
+    <div class="actions">
+      <a routerLink="/login" class="btn">Ingresar</a>
+      <a routerLink="/sign-up" class="btn btn-secondary">Crear cuenta</a>
+    </div>
+  } @else {
+    <a routerLink="/converter" class="btn">Ir al conversor</a>
+  }
+</section>

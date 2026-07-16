@@ -1,0 +1,48 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background-color: #1e293b;
+  color: #fff;
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #fff;
+  text-decoration: none;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+
+  a {
+    color: #cbd5e1;
+    text-decoration: none;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  .user {
+    color: #93c5fd;
+    font-weight: 600;
+  }
+
+  button {
+    background: #334155;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.4rem 0.9rem;
+    cursor: pointer;
+
+    &:hover {
+      background: #475569;
+    }
+  }
+}

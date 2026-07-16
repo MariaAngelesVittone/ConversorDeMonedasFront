@@ -1,0 +1,35 @@
+<section class="form-card">
+  <h1>Crear cuenta</h1>
+
+  <form (ngSubmit)="onSubmit()" #signUpForm="ngForm">
+    <label>
+      Usuario
+      <input type="text" name="username" [(ngModel)]="signUpData.username" required />
+    </label>
+
+    <label>
+      Email
+      <input type="email" name="email" [(ngModel)]="signUpData.email" required />
+    </label>
+
+    <label>
+      Contraseña
+      <input type="password" name="password" [(ngModel)]="signUpData.password" required minlength="6" />
+    </label>
+
+    @if (errorMessage) {
+      <p class="error">{{ errorMessage }}</p>
+    }
+    @if (successMessage) {
+      <p class="success">{{ successMessage }}</p>
+    }
+
+    <button type="submit" [disabled]="signUpForm.invalid || loading">
+      {{ loading ? 'Creando...' : 'Crear cuenta' }}
+    </button>
+  </form>
+
+  <p class="switch">
+    ¿Ya tenés cuenta? <a routerLink="/login">Ingresá</a>
+  </p>
+</section>

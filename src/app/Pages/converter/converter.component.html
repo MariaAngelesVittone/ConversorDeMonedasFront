@@ -1,0 +1,46 @@
+<section class="converter">
+  <h1>Convertir moneda</h1>
+
+  @if (currencies.length === 0) {
+    <p>No hay monedas cargadas todavía.</p>
+  } @else {
+    <form (ngSubmit)="onSubmit()" #converterForm="ngForm">
+      <label>
+        De
+        <select name="fromCode" [(ngModel)]="fromCode" required>
+          <option [ngValue]="null" disabled>Seleccioná una moneda</option>
+          @for (currency of currencies; track currency.code) {
+            <option [ngValue]="currency.code">{{ currency.leyend }} ({{ currency.symbol }})</option>
+          }
+        </select>
+      </label>
+
+      <label>
+        A
+        <select name="toCode" [(ngModel)]="toCode" required>
+          <option [ngValue]="null" disabled>Seleccioná una moneda</option>
+          @for (currency of currencies; track currency.code) {
+            <option [ngValue]="currency.code">{{ currency.leyend }} ({{ currency.symbol }})</option>
+          }
+        </select>
+      </label>
+
+      <label>
+        Monto
+        <input type="number" name="amount" [(ngModel)]="amount" min="0" step="0.01" required />
+      </label>
+
+      @if (errorMessage) {
+        <p class="error">{{ errorMessage }}</p>
+      }
+
+      @if (result !== null) {
+        <p class="success">Resultado: {{ result | number: '1.2-4' }}</p>
+      }
+
+      <button type="submit" [disabled]="converterForm.invalid || loading">
+        {{ loading ? 'Convirtiendo...' : 'Convertir' }}
+      </button>
+    </form>
+  }
+</section>

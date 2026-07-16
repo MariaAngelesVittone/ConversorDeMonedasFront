@@ -1,0 +1,27 @@
+<section class="form-card">
+  <h1>Ingresar</h1>
+
+  <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+    <label>
+      Usuario
+      <input type="text" name="username" [(ngModel)]="credentials.username" required />
+    </label>
+
+    <label>
+      Contraseña
+      <input type="password" name="password" [(ngModel)]="credentials.password" required />
+    </label>
+
+    @if (errorMessage) {
+      <p class="error">{{ errorMessage }}</p>
+    }
+
+    <button type="submit" [disabled]="loginForm.invalid || loading">
+      {{ loading ? 'Ingresando...' : 'Ingresar' }}
+    </button>
+  </form>
+
+  <p class="switch">
+    ¿No tenés cuenta? <a routerLink="/sign-up">Registrate</a>
+  </p>
+</section>
