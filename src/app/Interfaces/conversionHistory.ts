@@ -3,6 +3,8 @@ export interface ConversionHistoryItem {
   userId: number;
   fromCurrencyCode: number;
   toCurrencyCode: number;
+  fromCurrencyLeyend: string;
+  toCurrencyLeyend: string;
   amount: number;
   result: number;
   date: string;

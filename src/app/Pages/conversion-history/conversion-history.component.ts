@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DecimalPipe, DatePipe } from '@angular/common';
 import { HistoryService } from '../../Services/history.service';
-import { CurrencyService } from '../../Services/currency.service';
 import { ConversionHistoryItem } from '../../Interfaces/conversionHistory';
 
 @Component({
@@ -15,15 +14,14 @@ export class ConversionHistoryComponent implements OnInit {
   history: ConversionHistoryItem[] = [];
   loading = true;
 
-  constructor(private historyService: HistoryService, public currencyService: CurrencyService) {}
+  constructor(private historyService: HistoryService) {}
 
   async ngOnInit() {
-    await this.currencyService.getCurrencies();
     this.history = await this.historyService.getHistory();
     this.loading = false;
   }
 
-  currencyLabel(code: number): string {
-    return this.currencyService.currencies.find((c) => c.code === code)?.leyend ?? `#${code}`;
+  currencyLabel(leyend: string): string {
+    return leyend || 'Moneda eliminada';
   }
 }
