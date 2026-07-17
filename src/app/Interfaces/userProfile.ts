@@ -5,4 +5,5 @@ export interface UserProfile {
   subscriptionType: number;
   conversionLimit: number;
   isAdmin: boolean;
+  canConvert: boolean;
 }

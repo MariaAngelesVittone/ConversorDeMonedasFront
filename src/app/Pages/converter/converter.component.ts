@@ -3,6 +3,7 @@ import { DecimalPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { CurrencyService } from '../../Services/currency.service';
+import { ProfileService } from '../../Services/profile.service';
 import { Currency } from '../../Interfaces/currency';
 
 @Component({
@@ -22,10 +23,15 @@ export class ConverterComponent implements OnInit {
   loading = false;
   outOfConversions = false;
 
-  constructor(public currencyService: CurrencyService) {}
+  constructor(public currencyService: CurrencyService, private profileService: ProfileService) {}
 
   async ngOnInit() {
     await this.currencyService.getCurrencies();
+
+    const profile = await this.profileService.getMyProfile();
+    if (profile) {
+      this.outOfConversions = !profile.canConvert;
+    }
   }
 
   get currencies(): Currency[] {
