@@ -18,30 +18,9 @@
     <h2>Suscripción</h2>
     <p class="hint">Podés cambiar de plan cuando quieras.</p>
 
-    <div class="plans">
-      @for (plan of plans; track plan.type) {
-        <div class="plan-card" [class.current]="plan.type === profile.subscriptionType">
-          <div class="plan-name">
-            {{ plan.name }}
-            @if (plan.type === profile.subscriptionType) {
-              <span class="badge">Plan actual</span>
-            }
-          </div>
-          <p class="plan-desc">{{ plan.description }}</p>
-          @if (plan.type !== profile.subscriptionType) {
-            <button type="button" (click)="requestChange(plan)">Cambiar a {{ plan.name }}</button>
-          }
-        </div>
-      }
-    </div>
-  }
-
-  @if (pendingPlan) {
-    <app-confirm-dialog
-      [message]="pendingPlan.confirmMessage"
-      confirmLabel="Aceptar"
-      (confirmed)="onConfirmChange()"
-      (cancelled)="onCancelChange()"
-    ></app-confirm-dialog>
+    <app-subscription-plans
+      [currentType]="profile.subscriptionType"
+      (changed)="onPlanChanged($event)"
+    ></app-subscription-plans>
   }
 </section>

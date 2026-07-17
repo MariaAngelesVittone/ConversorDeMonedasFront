@@ -53,9 +53,23 @@
       @if (outOfConversions) {
         <div class="upsell">
           <p>Alcanzaste el límite de conversiones de tu plan.</p>
-          <a routerLink="/profile" class="btn">Cambiar de plan</a>
+          <button type="button" class="btn" (click)="openPlanPopup()">Cambiar de plan</button>
         </div>
       }
     </form>
+  }
+
+  @if (showPlanPopup) {
+    <div class="popup-overlay" (click)="closePlanPopup()">
+      <div class="popup" (click)="$event.stopPropagation()">
+        <button type="button" class="popup-close" (click)="closePlanPopup()" title="Cerrar" aria-label="Cerrar">✕</button>
+        <h2>Cambiá tu plan</h2>
+        <p class="popup-hint">Alcanzaste el límite de conversiones de tu plan actual.</p>
+        <app-subscription-plans
+          [currentType]="currentSubscriptionType"
+          (changed)="onPlanChanged($event)"
+        ></app-subscription-plans>
+      </div>
+    </div>
   }
 </section>

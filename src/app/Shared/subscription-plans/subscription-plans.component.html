@@ -1,0 +1,25 @@
+<div class="plans">
+  @for (plan of plans; track plan.type) {
+    <div class="plan-card" [class.current]="plan.type === currentType">
+      <div class="plan-name">
+        {{ plan.name }}
+        @if (plan.type === currentType) {
+          <span class="badge">Plan actual</span>
+        }
+      </div>
+      <p class="plan-desc">{{ plan.description }}</p>
+      @if (plan.type !== currentType) {
+        <button type="button" (click)="requestChange(plan)">Cambiar a {{ plan.name }}</button>
+      }
+    </div>
+  }
+</div>
+
+@if (pendingPlan) {
+  <app-confirm-dialog
+    [message]="pendingPlan.confirmMessage"
+    confirmLabel="Aceptar"
+    (confirmed)="onConfirmChange()"
+    (cancelled)="onCancelChange()"
+  ></app-confirm-dialog>
+}
