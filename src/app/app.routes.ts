@@ -6,6 +6,7 @@ import { ConverterComponent } from './Pages/converter/converter.component';
 import { CurrenciesComponent } from './Pages/currencies/currencies.component';
 import { ConversionHistoryComponent } from './Pages/conversion-history/conversion-history.component';
 import { AdminComponent } from './Pages/admin/admin.component';
+import { ProfileComponent } from './Pages/profile/profile.component';
 import { NotFoundComponent } from './Pages/not-found/not-found.component';
 import { soloLoggedGuard } from './Guards/solo-logged.guard';
 import { soloPublicoGuard } from './Guards/solo-publico.guard';
@@ -31,6 +32,11 @@ export const routes: Routes = [
     path: 'admin',
     component: AdminComponent,
     canActivate: [soloAdminGuard],
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [soloLoggedGuard],
   },
   {
     path: 'login',

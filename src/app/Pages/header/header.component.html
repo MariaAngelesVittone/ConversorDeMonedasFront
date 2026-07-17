@@ -9,7 +9,7 @@
       @if (authService.isAdmin) {
         <a routerLink="/admin">Admin</a>
       }
-      <span class="user">{{ authService.username }}</span>
+      <a class="user" routerLink="/profile">{{ authService.username }}</a>
       <button type="button" (click)="logout()">Salir</button>
     } @else {
       <a routerLink="/login">Ingresar</a>

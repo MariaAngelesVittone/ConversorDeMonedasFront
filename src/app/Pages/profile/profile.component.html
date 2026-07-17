@@ -1,0 +1,47 @@
+<section class="profile">
+  <h1>Mi perfil</h1>
+
+  @if (loading) {
+    <p>Cargando...</p>
+  } @else if (!profile) {
+    <p class="error">No se pudo cargar el perfil.</p>
+  } @else {
+    <div class="user-info">
+      <p><strong>Usuario:</strong> {{ profile.username }}</p>
+      <p><strong>Email:</strong> {{ profile.email }}</p>
+    </div>
+
+    @if (successMessage) {
+      <p class="success">{{ successMessage }}</p>
+    }
+
+    <h2>Suscripción</h2>
+    <p class="hint">Las cuentas siempre arrancan en Free. Podés cambiar de plan cuando quieras.</p>
+
+    <div class="plans">
+      @for (plan of plans; track plan.type) {
+        <div class="plan-card" [class.current]="plan.type === profile.subscriptionType">
+          <div class="plan-name">
+            {{ plan.name }}
+            @if (plan.type === profile.subscriptionType) {
+              <span class="badge">Plan actual</span>
+            }
+          </div>
+          <p class="plan-desc">{{ plan.description }}</p>
+          @if (plan.type !== profile.subscriptionType) {
+            <button type="button" (click)="requestChange(plan)">Cambiar a {{ plan.name }}</button>
+          }
+        </div>
+      }
+    </div>
+  }
+
+  @if (pendingPlan) {
+    <app-confirm-dialog
+      [message]="pendingPlan.confirmMessage"
+      confirmLabel="Aceptar"
+      (confirmed)="onConfirmChange()"
+      (cancelled)="onCancelChange()"
+    ></app-confirm-dialog>
+  }
+</section>
