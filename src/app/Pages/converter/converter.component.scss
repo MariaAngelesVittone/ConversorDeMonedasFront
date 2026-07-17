@@ -48,6 +48,29 @@
       background-color: #93c5fd;
       cursor: not-allowed;
     }
+
+    &.blocked:disabled {
+      background-color: #94a3b8;
+    }
+  }
+
+  .upsell {
+    margin-top: -0.25rem;
+    padding: 0.9rem 1rem;
+    border-radius: 8px;
+    background-color: #fdf1de;
+    border: 1px solid #f3d9ab;
+    text-align: center;
+
+    p {
+      margin: 0 0 0.6rem;
+      font-size: 0.9rem;
+      color: #92400e;
+    }
+
+    .btn {
+      display: inline-block;
+    }
   }
 
   .swap-btn {

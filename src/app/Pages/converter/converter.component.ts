@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { CurrencyService } from '../../Services/currency.service';
 import { Currency } from '../../Interfaces/currency';
 
 @Component({
   selector: 'app-converter',
   standalone: true,
-  imports: [FormsModule, DecimalPipe],
+  imports: [FormsModule, DecimalPipe, RouterLink],
   templateUrl: './converter.component.html',
   styleUrl: './converter.component.scss',
 })
@@ -19,6 +20,7 @@ export class ConverterComponent implements OnInit {
   result: number | null = null;
   errorMessage: string | null = null;
   loading = false;
+  outOfConversions = false;
 
   constructor(public currencyService: CurrencyService) {}
 
@@ -56,9 +58,11 @@ export class ConverterComponent implements OnInit {
 
     if (!response.ok) {
       this.errorMessage = response.message ?? 'No se pudo realizar la conversión.';
+      this.outOfConversions = this.errorMessage.includes('No se pueden realizar mas conversiones');
       return;
     }
 
+    this.outOfConversions = false;
     this.result = response.result ?? null;
   }
 }

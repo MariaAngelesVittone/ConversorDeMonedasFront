@@ -26,9 +26,8 @@ const PLANS: PlanInfo[] = [
   {
     type: 2,
     name: 'Pro',
-    description: 'Conversiones ilimitadas. Plan pago (simulado: no se realiza ningún cobro real).',
-    confirmMessage:
-      'Pro es un plan pago con conversiones ilimitadas. Esta es una simulación: no se te va a cobrar nada ni se te va a redirigir a ningún lado a pagar. ¿Confirmás el cambio?',
+    description: 'Conversiones ilimitadas. Plan pago.',
+    confirmMessage: 'Pro es un plan pago con conversiones ilimitadas. ¿Confirmás el cambio?',
   },
 ];
 

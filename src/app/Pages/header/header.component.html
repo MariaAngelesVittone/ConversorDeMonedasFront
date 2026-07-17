@@ -10,10 +10,19 @@
         <a routerLink="/admin">Admin</a>
       }
       <a class="user" routerLink="/profile">{{ authService.username }}</a>
-      <button type="button" (click)="logout()">Salir</button>
+      <button type="button" (click)="requestLogout()">Salir</button>
     } @else {
       <a routerLink="/login">Ingresar</a>
       <a routerLink="/sign-up">Registrarme</a>
     }
   </nav>
+
+  @if (confirmingLogout) {
+    <app-confirm-dialog
+      message="¿Seguro que querés salir?"
+      confirmLabel="Salir"
+      (confirmed)="confirmLogout()"
+      (cancelled)="cancelLogout()"
+    ></app-confirm-dialog>
+  }
 </header>

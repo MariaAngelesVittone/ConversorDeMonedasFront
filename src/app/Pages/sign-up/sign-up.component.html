@@ -14,7 +14,23 @@
 
     <label>
       Contraseña
-      <input type="password" name="password" [(ngModel)]="signUpData.password" required minlength="6" />
+      <div class="password-field">
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          name="password"
+          [(ngModel)]="signUpData.password"
+          required
+          minlength="6"
+        />
+        <button
+          type="button"
+          class="toggle-password"
+          (click)="togglePasswordVisibility()"
+          [title]="showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+        >
+          {{ showPassword ? '🙈' : '👁' }}
+        </button>
+      </div>
     </label>
 
     @if (errorMessage) {

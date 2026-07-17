@@ -9,7 +9,22 @@
 
     <label>
       Contraseña
-      <input type="password" name="password" [(ngModel)]="credentials.password" required />
+      <div class="password-field">
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          name="password"
+          [(ngModel)]="credentials.password"
+          required
+        />
+        <button
+          type="button"
+          class="toggle-password"
+          (click)="togglePasswordVisibility()"
+          [title]="showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+        >
+          {{ showPassword ? '🙈' : '👁' }}
+        </button>
+      </div>
     </label>
 
     @if (errorMessage) {

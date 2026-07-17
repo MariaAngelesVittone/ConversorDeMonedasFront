@@ -15,6 +15,7 @@ export class LoginComponent {
   credentials: Login = { username: '', password: '' };
   errorMessage: string | null = null;
   loading = false;
+  showPassword = false;
 
   constructor(private authService: AuthenticationService, private router: Router) {}
 
@@ -32,5 +33,9 @@ export class LoginComponent {
     }
 
     this.router.navigate(['/converter']);
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 }

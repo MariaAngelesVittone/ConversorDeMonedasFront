@@ -16,6 +16,7 @@ export class SignUpComponent {
   errorMessage: string | null = null;
   successMessage: string | null = null;
   loading = false;
+  showPassword = false;
 
   constructor(private userService: UserService, private router: Router) {}
 
@@ -35,5 +36,9 @@ export class SignUpComponent {
 
     this.successMessage = 'Cuenta creada con éxito. Ya podés iniciar sesión.';
     setTimeout(() => this.router.navigate(['/login']), 1200);
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 }
