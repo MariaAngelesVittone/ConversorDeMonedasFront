@@ -120,4 +120,13 @@
       }
     </div>
   }
+
+  @if (confirmMessage) {
+    <app-confirm-dialog
+      [message]="confirmMessage"
+      confirmLabel="Eliminar"
+      (confirmed)="onConfirmAccepted()"
+      (cancelled)="onConfirmCancelled()"
+    ></app-confirm-dialog>
+  }
 </section>

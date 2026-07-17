@@ -5,11 +5,12 @@ import { CurrencyService } from '../../Services/currency.service';
 import { AdminUser } from '../../Interfaces/adminUser';
 import { Currency } from '../../Interfaces/currency';
 import { SubscriptionTypeLabels } from '../../Interfaces/userResponse';
+import { ConfirmDialogComponent } from '../../Shared/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, ConfirmDialogComponent],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss',
 })
@@ -26,6 +27,9 @@ export class AdminComponent implements OnInit {
   editingCode: number | null = null;
   editForm = { leyenda: '', idc: 0 };
   editError: string | null = null;
+
+  confirmMessage: string | null = null;
+  private confirmAction: (() => void) | null = null;
 
   loading = true;
 
@@ -53,12 +57,14 @@ export class AdminComponent implements OnInit {
     }
   }
 
-  async deleteUser(user: AdminUser) {
-    if (!confirm(`¿Dar de baja a ${user.username}?`)) return;
-    const ok = await this.adminService.deleteUser(user.id);
-    if (ok) {
-      this.users = this.users.filter((u) => u.id !== user.id);
-    }
+  deleteUser(user: AdminUser) {
+    this.confirmMessage = `¿Dar de baja a ${user.username}?`;
+    this.confirmAction = async () => {
+      const ok = await this.adminService.deleteUser(user.id);
+      if (ok) {
+        this.users = this.users.filter((u) => u.id !== user.id);
+      }
+    };
   }
 
   async createCurrency() {
@@ -97,11 +103,24 @@ export class AdminComponent implements OnInit {
     await this.reload();
   }
 
-  async deleteCurrency(currency: Currency) {
-    if (!confirm(`¿Eliminar la moneda ${currency.leyend}?`)) return;
-    const ok = await this.adminService.deleteCurrency(currency.code);
-    if (ok) {
-      this.currencies = this.currencies.filter((c) => c.code !== currency.code);
-    }
+  deleteCurrency(currency: Currency) {
+    this.confirmMessage = `¿Eliminar la moneda ${currency.leyend}?`;
+    this.confirmAction = async () => {
+      const ok = await this.adminService.deleteCurrency(currency.code);
+      if (ok) {
+        this.currencies = this.currencies.filter((c) => c.code !== currency.code);
+      }
+    };
+  }
+
+  onConfirmAccepted() {
+    this.confirmAction?.();
+    this.confirmMessage = null;
+    this.confirmAction = null;
+  }
+
+  onConfirmCancelled() {
+    this.confirmMessage = null;
+    this.confirmAction = null;
   }
 }
