@@ -19,7 +19,7 @@
       <tbody>
         @for (item of history; track item.id) {
           <tr>
-            <td>{{ item.date | date: 'dd/MM/yyyy HH:mm' : '-0300' }} hs (ARG)</td>
+            <td>{{ item.date | date: 'dd/MM/yyyy HH:mm' : '-0300' }} hs</td>
             <td>{{ currencyLabel(item.fromCurrencyCode) }}</td>
             <td>{{ currencyLabel(item.toCurrencyCode) }}</td>
             <td>{{ item.amount | number: '1.2-4' }}</td>
