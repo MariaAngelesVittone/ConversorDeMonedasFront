@@ -1,12 +1,15 @@
 <section class="currencies">
   <h1>Monedas disponibles</h1>
 
-  @if (currencies.length === 0) {
+  @if (loading) {
+    <p>Cargando...</p>
+  } @else if (currencies.length === 0) {
     <p>No hay monedas cargadas todavía.</p>
   } @else {
     <table>
       <thead>
         <tr>
+          <th></th>
           <th>Código</th>
           <th>Leyenda</th>
           <th>Símbolo</th>
@@ -16,6 +19,17 @@
       <tbody>
         @for (currency of currencies; track currency.code) {
           <tr>
+            <td>
+              <button
+                type="button"
+                class="favorite-btn"
+                [class.active]="currency.isFavorite"
+                (click)="toggleFavorite(currency)"
+                [title]="currency.isFavorite ? 'Quitar de favoritas' : 'Marcar como favorita'"
+              >
+                {{ currency.isFavorite ? '★' : '☆' }}
+              </button>
+            </td>
             <td>{{ currency.code }}</td>
             <td>{{ currency.leyend }}</td>
             <td>{{ currency.symbol }}</td>

@@ -5,6 +5,10 @@
     @if (authService.isLoggedIn) {
       <a routerLink="/converter">Convertir</a>
       <a routerLink="/currencies">Monedas</a>
+      <a routerLink="/conversion-history">Historial</a>
+      @if (authService.isAdmin) {
+        <a routerLink="/admin">Admin</a>
+      }
       <span class="user">{{ authService.username }}</span>
       <button type="button" (click)="logout()">Salir</button>
     } @else {

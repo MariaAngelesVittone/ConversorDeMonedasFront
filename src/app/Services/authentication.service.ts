@@ -59,4 +59,8 @@ export class AuthenticationService {
   get username(): string | null {
     return this.logueado?.given_name ?? null;
   }
+
+  get isAdmin(): boolean {
+    return this.logueado?.Rol === 'True';
+  }
 }
