@@ -26,6 +26,14 @@
   }
 }
 
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  min-width: 100%;
+}
+
 button {
   padding: 0.4rem 0.9rem;
   border-radius: 6px;
@@ -34,6 +42,7 @@ button {
   color: #fff;
   cursor: pointer;
   font-size: 0.9rem;
+  white-space: nowrap;
 
   &.danger {
     background-color: #dc2626;
@@ -43,6 +52,10 @@ button {
     background-color: #cbd5e1;
     cursor: not-allowed;
   }
+}
+
+td {
+  white-space: nowrap;
 }
 
 .actions {

@@ -27,17 +27,23 @@ export class AdminService {
     }
   }
 
-  async updateSubscription(userId: number, subscriptionType: number): Promise<boolean> {
+  async updateSubscription(
+    userId: number,
+    subscriptionType: number
+  ): Promise<{ ok: boolean; conversionLimit?: number }> {
     try {
       const res = await fetch(`${environment.API_URL}AdminUser/${userId}/subscription`, {
         method: 'PUT',
         headers: this.authHeaders(),
         body: JSON.stringify(subscriptionType),
       });
-      return res.ok;
+      if (!res.ok) return { ok: false };
+
+      const body = await res.json();
+      return { ok: true, conversionLimit: body.conversionLimit };
     } catch (error) {
       console.error('Error al actualizar la suscripcion:', error);
-      return false;
+      return { ok: false };
     }
   }
 

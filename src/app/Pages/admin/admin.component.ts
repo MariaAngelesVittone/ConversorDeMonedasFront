@@ -44,9 +44,12 @@ export class AdminComponent implements OnInit {
   }
 
   async changeSubscription(user: AdminUser, newType: number) {
-    const ok = await this.adminService.updateSubscription(user.id, newType);
-    if (ok) {
+    const result = await this.adminService.updateSubscription(user.id, newType);
+    if (result.ok) {
       user.subscriptionType = newType;
+      if (result.conversionLimit !== undefined) {
+        user.conversionLimit = result.conversionLimit;
+      }
     }
   }
 
