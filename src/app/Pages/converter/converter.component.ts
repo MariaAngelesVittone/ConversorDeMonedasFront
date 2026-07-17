@@ -30,6 +30,12 @@ export class ConverterComponent implements OnInit {
     return this.currencyService.currencies;
   }
 
+  swapCurrencies() {
+    [this.fromCode, this.toCode] = [this.toCode, this.fromCode];
+    this.result = null;
+    this.errorMessage = null;
+  }
+
   async onSubmit() {
     this.errorMessage = null;
     this.result = null;
